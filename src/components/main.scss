@@ -1,0 +1,587 @@
+* {
+    touch-action: pan-y;
+}
+
+
+/*
+*宏
+*/
+
+@mixin pd($tm, $lr) {
+    padding: $tm $lr;
+}
+
+@mixin wh($w, $h) {
+    width: $w;
+    height: $h;
+}
+
+@mixin font($size, $family, $color, $line) {
+    font: $size $family;
+    color: $color;
+    line-height: $line;
+}
+
+
+/*
+*变量
+*/
+
+$fs: .3rem;
+$lh: .48rem;
+
+/*
+*全局类
+*/
+
+.left {
+    display: block;
+    float: left;
+}
+
+.right {
+    display: block;
+    float: right;
+}
+
+.icon {
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+}
+
+
+/*
+*样式
+*/
+
+.flipbook-viewport {
+    @include wh(100%, 100%);
+    overflow: hidden;
+    background: #faf6ec;
+}
+
+.flipbook-viewport .page {
+    background: #faf6ec;
+}
+
+.vis {
+    display: none;
+    div {
+        @include pd(0rem, .3rem);
+        @include font($fs, PingFangSC-Regular, #333, $lh);
+        position: absolute;
+        top: 0;
+    }
+    .vis3 {
+        line-height: .46rem;
+    }
+}
+
+.modal {
+    position: absolute;
+    z-index: 998;
+}
+
+.modal.index {
+    @include wh(92%, 100%);
+    z-index: 999;
+    background-color: #dcdcd8;
+    display: none;
+    left: -92%;
+    .button {
+        @include wh( .49rem, 1.19rem);
+        background: url('./image/侧拉@3x.png') no-repeat center;
+        background-color: #EDEDE8;
+        background-size: cover;
+        position: absolute;
+        top: 50%;
+        left: 100%;
+        margin-top: -.245rem;
+        cursor: pointer;
+    }
+    .index_warp {
+        @include wh(100%,
+        100%);
+    }
+    dl {
+        @include wh( 100%,
+        100%);
+        padding: 0rem .3rem;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+    }
+    dt {
+        @include wh(100%,
+        auto);
+        flex: none;
+        padding: .72rem 0rem .56rem;
+        .font1 {
+            @include font(.3rem,
+            PingFangSC-Regular,
+            #333,
+            .3rem);
+            float: left;
+        }
+        .font2 {
+            @include font(.3rem,
+            PingFangSC-Regular,
+            #666,
+            .3rem);
+            float: right;
+        }
+    }
+    dd {
+        flex: 1;
+        @include wh(100%,
+        .89rem);
+        border-bottom: 1px dashed #a6a6a6;
+        @include font(.28rem,
+        PingFangSC-Light,
+        #555,
+        .88rem);
+        .font1 {
+            float: left;
+        }
+        .font2 {
+            float: right;
+        }
+    }
+}
+
+.modal.bar {
+    @include wh(1rem,
+    1rem);
+    // border-radius: 0rem .1rem .1rem 0rem;
+    bottom: 2.2rem;
+    position: absolute;
+    li {
+        @include wh(1rem,
+        1rem);
+        border-radius: .26rem;
+        display: block;
+        background: rgba(0, 0, 0, .72);
+        // background: url('./image/bar_icon.fw.png') rgba(0, 0, 0, .72) no-repeat center;
+        // background-size: cover;
+        text-align: center;
+        color: rgba(255, 255, 255, .72);
+        .icon {
+            font-size: .72rem;
+            margin-top: .14rem;
+        }
+    }
+    .icon1 {
+        background-position: 0rem 0rem;
+    }
+    .icon2 {
+        display: none;
+        background-position: 0rem -.8rem;
+    }
+}
+
+.modal.floor {
+    @include wh(100%,
+    1.4rem);
+    background: rgba(0, 0, 0, .72);
+    bottom: 0;
+    padding: .2rem;
+    .button {
+        @include wh(1.6rem,
+        .65rem);
+        @include font(.3rem,
+        PingFangSC-Light,
+        #fff,
+        .63rem);
+        display: block;
+        float: right;
+        margin-top: .16rem;
+        border: 1px solid #fff;
+        border-radius: .05rem;
+        text-align: center;
+    }
+    .icon {
+        @include wh(1rem,
+        1rem);
+        border-radius: .1rem;
+        margin-right: .3rem;
+        float: left;
+        background: url('./image/logo@2x.png') no-repeat center;
+        background-size: cover;
+    }
+    .font {
+        padding: .15rem 0rem;
+        float: left;
+        .p1 {
+            @include font(.3rem,
+            PingFangSC-Regular,
+            #fff,
+            .3rem);
+            margin-bottom: .15rem;
+        }
+        .p2 {
+            @include font(.24rem,
+            PingFangSC-Light,
+            #fff,
+            .24rem);
+        }
+    }
+}
+
+.bg {
+    @include wh(100%,
+    100%);
+    position: absolute;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, .72);
+    display: none;
+    .bg_main {
+        @include wh(100%,
+        100%);
+        position: absolute;
+        z-index: 8;
+        top: 0;
+        left: 0;
+    }
+    ul {
+        @extend .bg_main;
+        z-index: 9;
+        display: flex;
+        li {
+            @include wh(20%,
+            100%);
+            line-height: 100vh;
+            text-align: center;
+            color: rgba(255, 255, 255, .72);
+            font-size: .42rem;
+        }
+        .li1,
+        .li3 {
+            flex: none;
+            opacity: 0;
+        }
+        .li2 {
+            flex: auto;
+        }
+    }
+}
+
+.flipbook {
+    font-size: $fs;
+    .peel {
+        background: #f8f8f8 no-repeat;
+        background-size: cover;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        div {
+            flex: 1;
+        }
+        strong {
+            flex: 3;
+        }
+        h3 {
+            width: .58rem;
+            @include font(.58rem,
+            PingFangSC-Medium,
+            #555,
+            auto);
+            // margin: 22% 0% 8.8%;
+            margin: 0rem auto !important;
+            display: table-cell;
+            vertical-align: middle;
+        }
+        article {
+            @include font($fs,
+            PingFangSC-Regular,
+            #333,
+            $lh);
+            flex: 2;
+        }
+    }
+    .page .mains {
+        @include wh(100%,
+        100%);
+        @include font($fs,
+        PingFangSC-Regular,
+        #333,
+        $lh);
+        text-align: left;
+        .cont {
+            @include pd(0rem,
+            0.3rem);
+        }
+        h4.fh {
+            @include wh(100%,
+            auto);
+            vertical-align: middle;
+            .first {
+                display: block;
+            }
+            .first.name {
+                @include font(.36rem,
+                PingFangSC-Medium,
+                #99845c,
+                .36rem);
+                text-align: center;
+            }
+            .first.pagenum {
+                float: right;
+                @include font($fs,
+                PingFangSC-Regular,
+                #a6a6a6,
+                $lh);
+            }
+        }
+        h4 {
+            overflow: hidden;
+            _zoom: 1;
+            @include wh(100%,
+            auto);
+            @include pd(.42rem,
+            0.3rem);
+            @include font(.28rem,
+            PingFangSC-Regular,
+            #a6a6a6,
+            .28rem);
+            span {
+                display: block;
+                line-height: .28rem;
+                height: .28rem;
+            }
+            .name2 {
+                float: left;
+            }
+            .pagenum2 {
+                float: right;
+            }
+        }
+    }
+    .page .ver .cont {
+        @include wh(100%,
+        80%);
+        display: flex;
+        flex-direction: row-reverse;
+    }
+    .page .ver tt {
+        // width: $fs;
+        overflow: visible;
+        float: right;
+        flex: 1;
+        width: $lh - .02rem;
+        height: 100%;
+        // margin: 0rem auto;
+        word-wrap: break-word;
+        writing-mode: vertical-lr;
+        writing-mode: tb-lr;
+        line-height: .46rem;
+    }
+    .page .re tt {
+        display: block;
+        @include wh(6rem,
+        1rem);
+        margin: 0rem auto;
+        background-color: #efe9dc;
+        // overflow: hidden;
+        span {
+            @include wh(1rem,
+            1rem);
+            border-left: 1px solid #c8b88c;
+            border-top: 1px solid #c8b88c;
+            display: block;
+            float: left;
+            text-align: center;
+            line-height: 1rem;
+        }
+        span:last-child {
+            border-right: 1px solid #c8b88c;
+        }
+    }
+    .page .re p:last-child span {
+        border-bottom: 1px solid #c8b88c;
+    }
+    .page .pic {
+        .photo {
+            @include wh(6rem,
+            6rem);
+            margin: 0rem auto .4rem;
+            position: relative;
+            i {
+                @include wh(1rem,
+                1rem);
+                display: block;
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                background-color: rgba(0, 0, 0, .72);
+                @include font(.3rem,
+                PingFangSC-Regular,
+                rgba(255,
+                255,
+                255,
+                .72),
+                1rem);
+                text-align: center;
+                z-index: 10;
+                border-radius: 0rem 0rem .1rem 0rem;
+            }
+        }
+        img {
+            @include wh(6rem,
+            6rem);
+            display: block;
+            position: absolute;
+            z-index: 8;
+            border-radius: .1rem;
+        }
+    }
+    .page ul {
+        @include wh(6.16rem,
+        100%);
+        margin: 0rem auto;
+        li {
+            @include wh(100%,
+            1.5rem);
+            border-bottom: 1px solid #e9e1cc;
+            line-height: 1.5rem;
+            display: flex;
+            img {
+                @include wh(.88rem,
+                .88rem);
+                display: block;
+                border-radius: 50%;
+                margin-right: .2rem;
+                position: absolute;
+                bottom: .3rem;
+            }
+            span {
+                flex: 1;
+                position: relative;
+                @include font(.3rem,
+                PingFangSC-Regular,
+                #333,
+                1.5rem);
+            }
+            span:last-child {
+                text-align: right;
+                @include font(.28rem,
+                PingFangSC-Regular,
+                #666,
+                1.5rem);
+            }
+        }
+    }
+    .page .contz {
+        @include wh(100%,
+        100%);
+    }
+    .page ol {
+        @include wh(100%,
+        100%);
+        padding: 0rem .3rem;
+        li {
+            display: block;
+            @include wh(auto,
+            auto);
+            text-align: center;
+            margin-bottom: .8rem;
+            img {
+                @include wh(2.9rem,
+                2.9rem);
+                border: .15rem solid #EFE9DC;
+                border-radius: .1rem;
+                display: block;
+                margin-bottom: .3rem;
+            }
+            .s_name_l {
+                padding-right: .1rem;
+            }
+            .s_name_r {
+                padding-left: .1rem;
+            }
+        }
+        li:nth-of-type(odd) {
+            float: left;
+        }
+        li:nth-of-type(even) {
+            float: right;
+        }
+    }
+    .page .old {
+        img {
+            @include wh(6.14rem,
+            9.14rem);
+            display: block;
+            margin: 0rem auto;
+        }
+    }
+}
+
+
+/*
+*媒体查询
+*/
+
+@media screen and (device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2) {
+    .flipbook .page ul {
+        padding: 0rem .18rem;
+    }
+    .flipbook .page ol li img {
+        @include wh(2.6rem,
+        2.6rem);
+    }
+    .flipbook .page .mains h4 {
+        padding: 0rem .3rem;
+        margin: .36rem 0rem;
+    }
+    .flipbook .page .pic .photo {
+        margin-bottom: .1rem;
+    }
+    .modal.index dt {
+        height: 1.3rem;
+        padding-top: .7rem;
+    }
+    .modal.index dd {
+        height: .72rem;
+        line-height: .72rem;
+    }
+}
+
+@media screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) {
+    .flipbook .page ul {
+        padding: 0rem .18rem;
+    }
+    .flipbook .page ol li img {
+        @include wh(2.6rem,
+        2.6rem);
+    }
+    .flipbook .page .mains h4 {
+        padding: 0rem .3rem;
+        margin: .36rem 0rem;
+    }
+    .flipbook .page .pic .photo {
+        margin-bottom: .1rem;
+    }
+    .modal.index dt {
+        height: 1.3rem;
+        padding-top: .7rem;
+    }
+    .modal.index dd {
+        height: .72rem;
+        line-height: .72rem;
+    }
+}
+
+
+/*
+// 补充
+.mains.clearfix.pic .cont p:first-child {
+    text-align: right
+}
+*/

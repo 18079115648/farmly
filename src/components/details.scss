@@ -1,0 +1,323 @@
+/*
+*宏
+*/
+
+@mixin pd($tm, $lr) {
+    padding: $tm $lr;
+}
+
+@mixin wh($w, $h) {
+    width: $w;
+    height: $h;
+}
+
+@mixin font($size, $family, $color, $line) {
+    font: $size $family;
+    color: $color;
+    line-height: $line;
+}
+
+
+/*
+*变量
+*/
+
+$fs: .3rem;
+$lh: .48rem;
+
+/*
+*全局类
+*/
+
+.left {
+    display: block;
+    float: left;
+}
+
+.right {
+    display: block;
+    float: right;
+}
+
+.icon {
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+}
+
+
+/*
+*样式
+*/
+
+
+/*
+*样式字体相关
+*/
+
+// 头部
+@mixin fontHeader($size: .32rem, $family: PingFangSC-Regular, $color: #333, $line: .5rem) {
+    font: $size $family;
+    color: $color;
+    line-height: $line;
+}
+
+// 作者-名字
+@mixin fontAuthorName($size: .28rem, $family: PingFangSC-Light, $color: #333, $line: .6rem) {
+    font: $size $family;
+    color: $color;
+    line-height: $line;
+}
+
+// 作者-其它
+@mixin fontAuthorIt($size: .24rem, $family: PingFangSC-Light, $color: #a6a6a6, $line: .6rem) {
+    font: $size $family;
+    color: $color;
+    line-height: $line;
+}
+
+// 文章
+@mixin fontMain($size: .24rem, $family: PingFangSC-Light, $color: #333, $line: .36rem) {
+    font: $size $family;
+    color: $color;
+    line-height: $line;
+}
+
+// 地址
+@mixin fontAddr($size: .24rem, $family: PingFangSC-Light, $color: #666, $line: .88rem) {
+    font: $size $family;
+    color: $color;
+    line-height: $line;
+}
+
+// 标签
+@mixin fontList($size: .28rem, $family: PingFangSC-Light, $color: #666, $line: .28rem) {
+    font: $size $family;
+    color: $color;
+    line-height: $line;
+}
+
+// 评论-名字
+@mixin fontArticleName($size: .28rem, $family: PingFangSC-Regular, $color: #a6a6a6, $line: .28rem) {
+    font: $size $family;
+    color: $color;
+    line-height: $line;
+}
+
+// 评论-正文
+@mixin fontArticleMain($size: .24rem, $family: PingFangSC-Light, $color: #333, $line: .24rem) {
+    font: $size $family;
+    color: $color;
+    line-height: $line;
+}
+
+// 评论-时间
+@mixin fontArticleTime($size: .20rem, $family: PingFangSC-Light, $color: #a6a6a6, $line: .20rem) {
+    font: $size $family;
+    color: $color;
+    line-height: $line;
+}
+
+// 顶层
+.details {
+    @include wh(100%, 100vh);
+    overflow: auto;
+    background-color: #F2ede1;
+    -webkit-overflow-scrolling: touch;
+    position: relative;
+    .details_view {
+        @include wh(100%, auto);
+    }
+}
+
+// 头部
+header {
+    @include fontHeader;
+    padding: .4rem 0.3rem 0rem;
+}
+
+// 作者
+.author {
+    @include fontAuthorIt;
+    margin-top: .28rem;
+    display: block;
+    padding: 0rem .3rem;
+    dt {
+        @include wh(.6rem, .6rem);
+        border-radius: 50%;
+        background-color: skyblue;
+        margin-right: .2rem;
+        float: left;
+        img {
+            @include wh(.6rem, .6rem);
+            border-radius: 50%;
+        }
+    }
+    dd {
+        margin-right: .2rem;
+        float: left;
+    }
+    .name {
+        @include fontAuthorName;
+        margin-right: .3rem;
+        float: left;
+    }
+}
+
+// 文章
+article {
+    @include fontMain;
+    margin: .2rem 0rem;
+    padding: 0rem .3rem;
+    img {
+        @include wh(100%, auto);
+        padding: .2rem 0rem;
+    }
+}
+
+// 地址
+section {
+    background-color: #f9f7f1;
+    padding: 0rem .3rem;
+    address {
+        @include fontAddr;
+    }
+    .address {
+        font-size: .36rem;
+    }
+    ul {
+        @include fontList;
+        li {
+            @include wh(auto, .55rem);
+            padding: 0rem .12rem;
+            border: 1px solid #E9E1CC;
+            background-color: #F8F8F8;
+            float: left;
+            line-height: .55rem;
+            text-align: center;
+            margin-right: .2rem;
+            margin-top: .1rem;
+        }
+    }
+    ol {
+        margin-top: .45rem;
+        margin-bottom: .3rem;
+        li {
+            @include wh(.6rem, .6rem);
+            border-radius: 50%;
+            margin-right: .2rem;
+            float: left;
+            background-color: skyblue;
+        }
+        .first {
+            @include wh(.6rem, .6rem);
+            margin-right: .2rem;
+            float: left;
+            color: #E99E56;
+        }
+        .likeavatar {
+            @include wh(.6rem, .6rem);
+            border-radius: 50%;
+        }
+        .count {
+            @include fontAddr;
+            @include wh(.5rem, .5rem);
+            line-height: .5rem;
+            text-align: center;
+            margin-top: .05rem;
+            color: #fff;
+            background-color: #32B16C;
+        }
+    }
+}
+
+b {
+    font-weight: normal;
+}
+
+// 评论
+main {
+    margin-top: .4rem;
+    dt {
+        @include fontArticleName;
+        padding: 0rem .3rem .2rem;
+        .pinlun {
+            color: #E78B34;
+        }
+    }
+    h4 {
+        u {
+            display: inline-block;
+            @include wh(.04rem, .25rem);
+            background-color: #E78B34;
+        }
+    }
+    dd {
+        background-color: #f9f7f1;
+        padding: 0rem .3rem;
+        .warp {
+            @include wh(100%, auto);
+            border-bottom: 1px solid #ece6d5;
+            display: flex;
+            padding-bottom: .1rem;
+        }
+        .photo {
+            @include wh(.6rem, .6rem);
+            border-radius: 50%;
+            background-color: skyblue;
+            margin: .3rem .2rem 0rem 0rem;
+            flex: none;
+        }
+        .middle {
+            width: 5.4rem;
+            flex: auto;
+        }
+        .day {
+            @include fontArticleTime;
+            margin-top: .55rem;
+            flex: none;
+        }
+        .user {
+            @include fontArticleName;
+            margin: .4rem 0rem .3rem;
+        }
+        .txt {
+            @include fontArticleMain;
+            line-height: .36rem;
+        }
+    }
+}
+
+s {
+    display: block;
+}
+
+.mu-refresh-control,
+.mu-refresh-control-noshow,
+.mu-refresh-svg-icon {
+    width: .3rem;
+    height: .3rem;
+}
+
+.mu-infinite-scroll {
+    line-height: .36rem;
+    .mu-infinite-scroll-text {
+        font-size: .24rem;
+    }
+}
+
+.lis::before {
+    content: '\A';
+    white-space: pre;
+}
+
+.likeavatar,
+.photo {
+    img {
+        width: .6rem;
+        height: .6rem;
+        border-radius: 50%;
+    }
+}

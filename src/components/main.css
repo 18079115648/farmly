@@ -1,0 +1,596 @@
+@charset "UTF-8";
+* {
+  touch-action: pan-y;
+}
+
+/*
+*宏
+*/
+/*
+*变量
+*/
+/*
+*全局类
+*/
+.left {
+  display: block;
+  float: left;
+}
+
+.right {
+  display: block;
+  float: right;
+}
+
+.icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+
+/*
+*样式
+*/
+.flipbook-viewport {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #faf6ec;
+}
+
+.flipbook-viewport .page {
+  background: #faf6ec;
+}
+
+.vis {
+  display: none;
+}
+
+.vis div {
+  padding: 0rem 0.3rem;
+  font: 0.3rem PingFangSC-Regular;
+  color: #333;
+  line-height: 0.48rem;
+  position: absolute;
+  top: 0;
+}
+
+.vis .vis3 {
+  line-height: .46rem;
+}
+
+.modal {
+  position: absolute;
+  z-index: 998;
+}
+
+.modal.index {
+  width: 92%;
+  height: 100%;
+  z-index: 999;
+  background-color: #dcdcd8;
+  display: none;
+  left: -92%;
+}
+
+.modal.index .button {
+  width: 0.49rem;
+  height: 1.19rem;
+  background: url("./image/侧拉@3x.png") no-repeat center;
+  background-color: #EDEDE8;
+  background-size: cover;
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  margin-top: -.245rem;
+  cursor: pointer;
+}
+
+.modal.index .index_warp {
+  width: 100%;
+  height: 100%;
+}
+
+.modal.index dl {
+  width: 100%;
+  height: 100%;
+  padding: 0rem .3rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal.index dt {
+  width: 100%;
+  height: auto;
+  flex: none;
+  padding: .72rem 0rem .56rem;
+}
+
+.modal.index dt .font1 {
+  font: 0.3rem PingFangSC-Regular;
+  color: #333;
+  line-height: 0.3rem;
+  float: left;
+}
+
+.modal.index dt .font2 {
+  font: 0.3rem PingFangSC-Regular;
+  color: #666;
+  line-height: 0.3rem;
+  float: right;
+}
+
+.modal.index dd {
+  flex: 1;
+  width: 100%;
+  height: 0.89rem;
+  border-bottom: 1px dashed #a6a6a6;
+  font: 0.28rem PingFangSC-Light;
+  color: #555;
+  line-height: 0.88rem;
+}
+
+.modal.index dd .font1 {
+  float: left;
+}
+
+.modal.index dd .font2 {
+  float: right;
+}
+
+.modal.bar {
+  width: 1rem;
+  height: 1rem;
+  bottom: 2.2rem;
+  position: absolute;
+}
+
+.modal.bar li {
+  width: 1rem;
+  height: 1rem;
+  border-radius: .26rem;
+  display: block;
+  background: rgba(0, 0, 0, 0.72);
+  text-align: center;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.modal.bar li .icon {
+  font-size: .72rem;
+  margin-top: .14rem;
+}
+
+.modal.bar .icon1 {
+  background-position: 0rem 0rem;
+}
+
+.modal.bar .icon2 {
+  display: none;
+  background-position: 0rem -.8rem;
+}
+
+.modal.floor {
+  width: 100%;
+  height: 1.4rem;
+  background: rgba(0, 0, 0, 0.72);
+  bottom: 0;
+  padding: .2rem;
+}
+
+.modal.floor .button {
+  width: 1.6rem;
+  height: 0.65rem;
+  font: 0.3rem PingFangSC-Light;
+  color: #fff;
+  line-height: 0.63rem;
+  display: block;
+  float: right;
+  margin-top: .16rem;
+  border: 1px solid #fff;
+  border-radius: .05rem;
+  text-align: center;
+}
+
+.modal.floor .icon {
+  width: 1rem;
+  height: 1rem;
+  border-radius: .1rem;
+  margin-right: .3rem;
+  float: left;
+  background: url("./image/logo@2x.png") no-repeat center;
+  background-size: cover;
+}
+
+.modal.floor .font {
+  padding: .15rem 0rem;
+  float: left;
+}
+
+.modal.floor .font .p1 {
+  font: 0.3rem PingFangSC-Regular;
+  color: #fff;
+  line-height: 0.3rem;
+  margin-bottom: .15rem;
+}
+
+.modal.floor .font .p2 {
+  font: 0.24rem PingFangSC-Light;
+  color: #fff;
+  line-height: 0.24rem;
+}
+
+.bg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.72);
+  display: none;
+}
+
+.bg .bg_main, .bg ul {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 8;
+  top: 0;
+  left: 0;
+}
+
+.bg ul {
+  z-index: 9;
+  display: flex;
+}
+
+.bg ul li {
+  width: 20%;
+  height: 100%;
+  line-height: 100vh;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: .42rem;
+}
+
+.bg ul .li1,
+.bg ul .li3 {
+  flex: none;
+  opacity: 0;
+}
+
+.bg ul .li2 {
+  flex: auto;
+}
+
+.flipbook {
+  font-size: 0.3rem;
+}
+
+.flipbook .peel {
+  background: #f8f8f8 no-repeat;
+  background-size: cover;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.flipbook .peel div {
+  flex: 1;
+}
+
+.flipbook .peel strong {
+  flex: 3;
+}
+
+.flipbook .peel h3 {
+  width: .58rem;
+  font: 0.58rem PingFangSC-Medium;
+  color: #555;
+  line-height: auto;
+  margin: 0rem auto !important;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.flipbook .peel article {
+  font: 0.3rem PingFangSC-Regular;
+  color: #333;
+  line-height: 0.48rem;
+  flex: 2;
+}
+
+.flipbook .page .mains {
+  width: 100%;
+  height: 100%;
+  font: 0.3rem PingFangSC-Regular;
+  color: #333;
+  line-height: 0.48rem;
+  text-align: left;
+}
+
+.flipbook .page .mains .cont {
+  padding: 0rem 0.3rem;
+}
+
+.flipbook .page .mains h4.fh {
+  width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+
+.flipbook .page .mains h4.fh .first {
+  display: block;
+}
+
+.flipbook .page .mains h4.fh .first.name {
+  font: 0.36rem PingFangSC-Medium;
+  color: #99845c;
+  line-height: 0.36rem;
+  text-align: center;
+}
+
+.flipbook .page .mains h4.fh .first.pagenum {
+  float: right;
+  font: 0.3rem PingFangSC-Regular;
+  color: #a6a6a6;
+  line-height: 0.48rem;
+}
+
+.flipbook .page .mains h4 {
+  overflow: hidden;
+  _zoom: 1;
+  width: 100%;
+  height: auto;
+  padding: 0.42rem 0.3rem;
+  font: 0.28rem PingFangSC-Regular;
+  color: #a6a6a6;
+  line-height: 0.28rem;
+}
+
+.flipbook .page .mains h4 span {
+  display: block;
+  line-height: .28rem;
+  height: .28rem;
+}
+
+.flipbook .page .mains h4 .name2 {
+  float: left;
+}
+
+.flipbook .page .mains h4 .pagenum2 {
+  float: right;
+}
+
+.flipbook .page .ver .cont {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.flipbook .page .ver tt {
+  overflow: visible;
+  float: right;
+  flex: 1;
+  width: 0.46rem;
+  height: 100%;
+  word-wrap: break-word;
+  writing-mode: vertical-lr;
+  writing-mode: tb-lr;
+  line-height: .46rem;
+}
+
+.flipbook .page .re tt {
+  display: block;
+  width: 6rem;
+  height: 1rem;
+  margin: 0rem auto;
+  background-color: #efe9dc;
+}
+
+.flipbook .page .re tt span {
+  width: 1rem;
+  height: 1rem;
+  border-left: 1px solid #c8b88c;
+  border-top: 1px solid #c8b88c;
+  display: block;
+  float: left;
+  text-align: center;
+  line-height: 1rem;
+}
+
+.flipbook .page .re tt span:last-child {
+  border-right: 1px solid #c8b88c;
+}
+
+.flipbook .page .re p:last-child span {
+  border-bottom: 1px solid #c8b88c;
+}
+
+.flipbook .page .pic .photo {
+  width: 6rem;
+  height: 6rem;
+  margin: 0rem auto .4rem;
+  position: relative;
+}
+
+.flipbook .page .pic .photo i {
+  width: 1rem;
+  height: 1rem;
+  display: block;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.72);
+  font: 0.3rem PingFangSC-Regular;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1rem;
+  text-align: center;
+  z-index: 10;
+  border-radius: 0rem 0rem .1rem 0rem;
+}
+
+.flipbook .page .pic img {
+  width: 6rem;
+  height: 6rem;
+  display: block;
+  position: absolute;
+  z-index: 8;
+  border-radius: .1rem;
+}
+
+.flipbook .page ul {
+  width: 6.16rem;
+  height: 100%;
+  margin: 0rem auto;
+}
+
+.flipbook .page ul li {
+  width: 100%;
+  height: 1.5rem;
+  border-bottom: 1px solid #e9e1cc;
+  line-height: 1.5rem;
+  display: flex;
+}
+
+.flipbook .page ul li img {
+  width: 0.88rem;
+  height: 0.88rem;
+  display: block;
+  border-radius: 50%;
+  margin-right: .2rem;
+  position: absolute;
+  bottom: .3rem;
+}
+
+.flipbook .page ul li span {
+  flex: 1;
+  position: relative;
+  font: 0.3rem PingFangSC-Regular;
+  color: #333;
+  line-height: 1.5rem;
+}
+
+.flipbook .page ul li span:last-child {
+  text-align: right;
+  font: 0.28rem PingFangSC-Regular;
+  color: #666;
+  line-height: 1.5rem;
+}
+
+.flipbook .page .contz {
+  width: 100%;
+  height: 100%;
+}
+
+.flipbook .page ol {
+  width: 100%;
+  height: 100%;
+  padding: 0rem .3rem;
+}
+
+.flipbook .page ol li {
+  display: block;
+  width: auto;
+  height: auto;
+  text-align: center;
+  margin-bottom: .8rem;
+}
+
+.flipbook .page ol li img {
+  width: 2.9rem;
+  height: 2.9rem;
+  border: .15rem solid #EFE9DC;
+  border-radius: .1rem;
+  display: block;
+  margin-bottom: .3rem;
+}
+
+.flipbook .page ol li .s_name_l {
+  padding-right: .1rem;
+}
+
+.flipbook .page ol li .s_name_r {
+  padding-left: .1rem;
+}
+
+.flipbook .page ol li:nth-of-type(odd) {
+  float: left;
+}
+
+.flipbook .page ol li:nth-of-type(even) {
+  float: right;
+}
+
+.flipbook .page .old img {
+  width: 6.14rem;
+  height: 9.14rem;
+  display: block;
+  margin: 0rem auto;
+}
+
+/*
+*媒体查询
+*/
+@media screen and (device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2) {
+  .flipbook .page ul {
+    padding: 0rem .18rem;
+  }
+  .flipbook .page ol li img {
+    width: 2.6rem;
+    height: 2.6rem;
+  }
+  .flipbook .page .mains h4 {
+    padding: 0rem .3rem;
+    margin: .36rem 0rem;
+  }
+  .flipbook .page .pic .photo {
+    margin-bottom: .1rem;
+  }
+  .modal.index dt {
+    height: 1.3rem;
+    padding-top: .7rem;
+  }
+  .modal.index dd {
+    height: .72rem;
+    line-height: .72rem;
+  }
+}
+
+@media screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) {
+  .flipbook .page ul {
+    padding: 0rem .18rem;
+  }
+  .flipbook .page ol li img {
+    width: 2.6rem;
+    height: 2.6rem;
+  }
+  .flipbook .page .mains h4 {
+    padding: 0rem .3rem;
+    margin: .36rem 0rem;
+  }
+  .flipbook .page .pic .photo {
+    margin-bottom: .1rem;
+  }
+  .modal.index dt {
+    height: 1.3rem;
+    padding-top: .7rem;
+  }
+  .modal.index dd {
+    height: .72rem;
+    line-height: .72rem;
+  }
+}
+
+/*
+// 补充
+.mains.clearfix.pic .cont p:first-child {
+    text-align: right
+}
+*/

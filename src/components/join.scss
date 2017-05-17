@@ -1,0 +1,91 @@
+.icon {
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+}
+
+// 表单
+@mixin fontInput($size: .28rem, $family: PingFangSC-Regular, $color: #a7a7a7, $line: .98rem) {
+    font: $size $family;
+    color: $color;
+    line-height: $line;
+}
+
+// 提示
+@mixin fontTitle($size: .28rem, $family: PingFangSC-Light, $color: #F79B17, $line: .28rem) {
+    font: $size $family;
+    color: $color;
+    line-height: $line;
+}
+
+@mixin fontTip($size: .24rem, $family: PingFangSC-Light, $color: #666, $line: .36rem) {
+    font: $size $family;
+    color: $color;
+    line-height: $line;
+}
+
+// 全局
+@mixin wh($w, $h) {
+    width: $w;
+    height: $h;
+}
+
+section {
+    width: 100%;
+    height: 100%;
+    min-width: 100vw;
+    min-height: 100vh;
+    background: #faf6ec;
+    overflow: hidden;
+}
+
+form {
+    @include fontInput;
+    margin-top: .8rem;
+    padding: 0rem .3rem;
+    .icon {
+        color: #222;
+        margin: 0rem .1rem 0rem 0rem;
+        font-size: .42rem;
+    }
+    fieldset {
+        @include wh(100%, .98rem);
+        border: none;
+        border-bottom: 1px solid #B68957;
+        input {
+            width: 2rem;
+            @include fontInput;
+            line-height: .36rem;
+            background: #faf6ec;
+        }
+        input:focus {
+            outline: none;
+        }
+    }
+    input[type="submit"] {
+        @include wh(100%, .88rem);
+        border-radius: .1rem;
+        background-color: #B68957;
+        line-height: .88rem;
+        color: #fff;
+        font-weight: 800;
+        margin-top: 1rem;
+    }
+    .submit2 {
+        background-color: #ccc !important;
+    }
+}
+
+article {
+    margin-top: 1rem;
+    padding: 0rem .3rem;
+    .title {
+        @include fontTitle;
+        margin-bottom: .3rem;
+    }
+    p {
+        @include fontTip;
+    }
+}

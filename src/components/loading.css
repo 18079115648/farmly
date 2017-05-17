@@ -1,0 +1,81 @@
+.load {
+  width: 100%;
+  height: 100%;
+  min-width: 100vw;
+  min-height: 100vh;
+  max-width: 100vw;
+  max-height: 100vh;
+  background: rgba(0, 0, 0, 0.36) url("/static/load/1.png") center no-repeat;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 10000;
+  animation: loadmove 1s linear infinite;
+  display: block;
+}
+
+@keyframes loadmove {
+  0% {
+    background: rgba(0, 0, 0, 0.72) url("/static/load/1.png") center no-repeat;
+  }
+  5% {
+    background: rgba(0, 0, 0, 0.72) url("/static/load/1.png") center no-repeat;
+  }
+  10% {
+    background: rgba(0, 0, 0, 0.72) url("/static/load/2.png") center no-repeat;
+  }
+  15% {
+    background: rgba(0, 0, 0, 0.72) url("/static/load/3.png") center no-repeat;
+  }
+  20% {
+    background: rgba(0, 0, 0, 0.72) url("/static/load/4.png") center no-repeat;
+  }
+  25% {
+    background: rgba(0, 0, 0, 0.72) url("/static/load/5.png") center no-repeat;
+  }
+  30% {
+    background: rgba(0, 0, 0, 0.72) url("/static/load/6.png") center no-repeat;
+  }
+  35% {
+    background: rgba(0, 0, 0, 0.72) url("/static/load/7.png") center no-repeat;
+  }
+  40% {
+    background: rgba(0, 0, 0, 0.72) url("/static/load/8.png") center no-repeat;
+  }
+  45% {
+    background: rgba(0, 0, 0, 0.72) url("/static/load/9.png") center no-repeat;
+  }
+  50% {
+    background: rgba(0, 0, 0, 0.72) url("/static/load/10.png") center no-repeat;
+  }
+  55% {
+    background: rgba(0, 0, 0, 0.72) url("/static/load/11.png") center no-repeat;
+  }
+  60% {
+    background: rgba(0, 0, 0, 0.72) url("/static/load/12.png") center no-repeat;
+  }
+  65% {
+    background: rgba(0, 0, 0, 0.72) url("/static/load/13.png") center no-repeat;
+  }
+  70% {
+    background: rgba(0, 0, 0, 0.72) url("/static/load/14.png") center no-repeat;
+  }
+  75% {
+    background: rgba(0, 0, 0, 0.72) url("/static/load/15.png") center no-repeat;
+  }
+  80% {
+    background: rgba(0, 0, 0, 0.72) url("/static/load/16.png") center no-repeat;
+  }
+  85% {
+    background: rgba(0, 0, 0, 0.72) url("/static/load/17.png") center no-repeat;
+  }
+  90% {
+    background: rgba(0, 0, 0, 0.72) url("/static/load/18.png") center no-repeat;
+  }
+  95% {
+    background: rgba(0, 0, 0, 0.72) url("/static/load/19.png") center no-repeat;
+  }
+  100% {
+    background: rgba(0, 0, 0, 0.72) url("/static/load/20.png") center no-repeat;
+  }
+}
