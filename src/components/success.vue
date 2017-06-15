@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { getModileType } from '../../static/js/app.js'
+// import { getModileType } from '../../static/js/app.js'
     export default {
         data() {
             return {
@@ -19,13 +19,7 @@ import { getModileType } from '../../static/js/app.js'
         },
         methods: {
             getApp() {
-                if (getModileType() === 1) {
-                    console.log('Android')
-                    window.location.href = 'https://fir.im/j87a'
-                } else {
-                    console.log('IOS')
-                    window.location.href = 'https://fir.im/qakr'
-                }
+                this.$router.push('/download')
             }
         }
     }

@@ -12,7 +12,7 @@
                 <dd class="public" v-if="story.view_status === 1">公开</dd>
                 <dd class="public" v-if="story.view_status === 0">保密</dd>
             </dl>
-            <article></article>
+            <article ref="article"></article>
             <section class="clearfix">
                 <address>
                     <svg class="icon address" aria-hidden="true">
@@ -64,6 +64,7 @@
 <script>
 import { appIn, GetQueryString } from '../../static/js/app.js'
 import axios from 'axios'
+// import $ from 'jquery'
 // import BScroll from 'better-scroll'
 import '../../static/js/iconfont.js'
     export default {
@@ -115,7 +116,8 @@ import '../../static/js/iconfont.js'
             }).then(function (response) {
                 self.story = response.data.story
                 self.author = response.data.story.author
-                appIn('article', self.story.content)
+                // appIn('article', self.story.content)
+                appIn('article', self.story.content.replace(/<img/g, '<img'))
                 self.liked = response.data.liked
                 self.tags = response.data.story.tags
                 self.comments = response.data.comments

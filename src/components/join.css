@@ -37,7 +37,8 @@ form fieldset {
 }
 
 form fieldset input {
-  width: 2rem;
+  width: 88%;
+  height: .36rem;
   font: 0.28rem PingFangSC-Regular;
   color: #a7a7a7;
   line-height: 0.98rem;
@@ -47,6 +48,30 @@ form fieldset input {
 
 form fieldset input:focus {
   outline: none;
+}
+
+form .Verification-group {
+  position: relative;
+}
+
+form .Verification-group input[type="text"] {
+  width: 60%;
+}
+
+form .Verification-group .icon {
+  margin-right: .2rem;
+}
+
+form input[type="button"],
+form .Verification-group .tim {
+  width: 2rem;
+  height: .36rem;
+  line-height: .36rem;
+  position: absolute;
+  right: 0.625em;
+  bottom: 0.75em;
+  z-index: 99;
+  float: right;
 }
 
 form input[type="submit"] {

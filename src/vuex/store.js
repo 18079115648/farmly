@@ -9,6 +9,7 @@ Vue.use(Vuex)
 const state = {
     uri: '/gene-api/',
     genealogy_id: '',
+    inviter_id: '',
     cover: '',
     name: ''
 }

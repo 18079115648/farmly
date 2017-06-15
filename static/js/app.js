@@ -176,16 +176,16 @@ export function pagetion(cell, cell2, name, ths, psn) {
     var lh = parseInt($(cell2).css('line-height')) // 行高
     var pd = parseInt($(cell2).css('padding-left')) // padding
     var lf = Math.floor((ww - pd * 2) / fs) // 每行字数
-    if (ths === undefined || ths === null || ths === '') {
-        var th = Math.floor(wh / lh) // 每页行数
-    } else {
-        th = ths // 每页行数
-    }
+    var th = ths
     var pf = lf * th // 每页字数
-    var pagetotal = Math.floor(fnum2 / pf) // 总页数 // var pagetotal = Math.ceil(fnum2 / pf) // 总页数
-    if (Math.floor(fnum2 / pf) <= 1) {
-        pagetotal = 1
-    }
+    var pagetotal = Math.ceil(fnum2 / pf) // 总页数 // var pagetotal = Math.ceil(fnum2 / pf) // 总页数
+    if (pagetotal === 0) pagetotal = 1
+        /**
+         *   if (Math.floor(fnum2 / pf) <= 1) {
+            pagetotal = 1
+        }
+        console.log(pagetotal)
+         */
     for (var i = 1; i <= pagetotal; i++) {
         var content = "<section><div class='mains clearfix'>"
         if (i === 1) {
@@ -243,20 +243,28 @@ export function pagetionV(cell, cell2, name, ths, psn) {
         // console.log($(cell2).height())
         // var fnum1 = strlen($(cell2).text()) // 总字数
     var fnum2 = $(cell2).text().length // 总字数[^\u4e00-\u9fa5]/g [^\x00-\xff]/g
-    var fs = parseInt($(cell2).css('font-size')) // 字号
+    var fs = parseInt($(cell2).css('font-size')) + 24 // 字号 24为单词空格的2倍 letter-spacing
     var lh = parseInt($(cell2).css('line-height')) // 行高
         // var pd = parseInt($(cell2).css('padding-left')) // padding
     var lf = Math.floor(wh * 0.8 / fs) // 每行字数
-    if (ths === undefined || ths === null || ths === '') {
-        var th = Math.floor(ww / lh) // 每页行数
-    } else {
-        th = ths // 每页行数
-    }
+        /**
+         * if (ths === undefined || ths === null || ths === '') {
+            var th = Math.floor(ww / lh) // 每页行数
+        } else {
+            th = ths // 每页行数
+        }
+         */
+    var th = ths
     var pf = lf * th // 每页字数
-    var pagetotal = Math.floor(fnum2 / pf) // 总页数 // var pagetotal = Math.ceil(fnum2 / pf) // 总页数
-    if (Math.floor(fnum2 / pf) <= 1) {
-        pagetotal = 1
-    }
+    var pagetotal = Math.ceil(fnum2 / pf) // 总页数 // var pagetotal = Math.ceil(fnum2 / pf) // 总页数
+    if (pagetotal === 0) pagetotal = 1
+
+    /**
+     *  if (Math.floor(fnum2 / pf) <= 1) {
+         pagetotal = 1
+     }
+     */
+
     for (var i = 1; i <= pagetotal; i++) {
         var content = '<section><div class="ver mains clearfix">'
         if (i === 1) {
@@ -307,7 +315,7 @@ export function pagetionV(cell, cell2, name, ths, psn) {
  * */
 export function pagetionRE(cell, data, name, ths, psn) {
     var fnum2 = data.length // 总字数[^\u4e00-\u9fa5]/g [^\x00-\xff]/g
-    var lf = 6 // 每行字数
+    var lf = 5 // 每行字数
     var th = ths // 每页行数
     var pf = lf * th // 每页字数
     var pagetotal = Math.ceil(fnum2 / pf) // 总页数 // var pagetotal = Math.ceil(fnum2 / pf) // 总页数
@@ -352,7 +360,7 @@ export function pagetionRE(cell, data, name, ths, psn) {
             content += '<tt class="clearfix">'
             var fns = fsz.substring((j - 1) * lf, lf * j)
             for (var k = 1; k <= lf; k++) {
-                content += '<span>' + fns.substring(k - 1, k) + '</span>'
+                content += '<span class="grid">' + fns.substring(k - 1, k) + '</span>'
             }
             content += '</tt>'
         }
@@ -381,14 +389,23 @@ export function pagetionIMG(cell, cell2, name, ths, fths, psn) {
         var pd = parseInt($(el).css('padding-left')) // padding
         var lf = Math.floor((ww - pd * 2) / fs) // 每行字数
             // 图片处理start
-        var img = $(el).children('img').attr('src').split(',') // 图片src
-        if (img.length === 1) {
-            var pic = '<div class="photo">' // 图片html
+        var img = $(el).children('img').attr('src').split(',').reverse() // 图片src
+        if (img.length === 1 && ($(el).children('img').attr('src') === null || $(el).children('img').attr('src') === undefined || $(el).children('img').attr('src') === '')) {
+            if (cell2 === '.vis5_main') {
+                var pic = '<div class="photo"><span class="nameold"></span>' // 图片html <img src="static/default/名人缺省@2x.png" />
+            } else if (cell2 === '.vis8_main') {
+                pic = '<div class="photo"><span class="citang"></span>' // 图片html <img src="static/default/组-2@2x.png" />
+            }
+        } else if (img.length === 1) {
+            pic = '<div class="photo">' // 图片html
+            for (var l = 0; l < img.length; l++) {
+                pic += '<img src=' + img[l] + '>'
+            }
         } else {
             pic = '<div class="photo photo2"><i>1/' + img.length + '</i>'
-        }
-        for (var l = 0; l < img.length; l++) {
-            pic += '<img src=' + img[l] + '>'
+            for (l = 0; l < img.length; l++) {
+                pic += '<img src=' + img[l] + '>'
+            }
         }
         pic += '</div>'
             // 图片end
@@ -479,7 +496,10 @@ export function pagetionIMG(cell, cell2, name, ths, fths, psn) {
                 }
             }
             content += '</div></div></section>'
-            content = content.replace(/>010</g, '>10<')
+                // content = content.replace(/>010</g, '>10<')
+            for (var ll = 9; ll <= 100; ll++) {
+                content = content.replace(new RegExp('>0' + ll + '<', 'g'), '>' + ll + '<')
+            }
             $(cell).append(content)
         }
         i2 += pagetotal
@@ -495,6 +515,9 @@ export function pagetionLs(cell, data, name, ths, psn) {
     var len = data.length // 总行数
     var th = ths // 每页行数
     var pagetotal = Math.ceil(len / th) // 总页数 // var pagetotal = Math.ceil(fnum2 / pf) // 总页数
+    if (pagetotal <= 1) {
+        pagetotal = 1
+    }
     for (var i = 1; i <= pagetotal; i++) {
         var content = '<section><div class="mains clearfix">'
         if (i === 1) {
@@ -554,6 +577,9 @@ export function pagetionFR(cell, data, name, ths, psn) {
     var len = data.length // 总行数
     var th = ths // 每页行数
     var pagetotal = Math.ceil(len / th) // 总页数 // var pagetotal = Math.ceil(fnum2 / pf) // 总页数
+    if (pagetotal <= 1) {
+        pagetotal = 1
+    }
     for (var i = 1; i <= pagetotal; i++) {
         var content = '<section><div class="mains clearfix">'
         if (i === 1) {
@@ -614,43 +640,58 @@ export function pagetionFR(cell, data, name, ths, psn) {
 export function pagetionPS(cell, data, name, psn) {
     var imgs = data
     var pagetotal = imgs.length // 总页数 // var pagetotal = Math.ceil(fnum2 / pf) // 总页数
-    for (var i = 1; i <= pagetotal; i++) {
+    if (pagetotal < 1) {
         var content = '<section><div class="mains clearfix old">'
-        if (i === 1) {
-            if (i + psn > 10) {
-                content +=
-                    "<h4 class='fh'><sapn class='first name'>" +
-                    name +
-                    "<sapn class='first pagenum'>" +
-                    (i + psn) +
-                    '</sapn></sapn></h4><div class="contp">'
-            } else {
-                content +=
-                    "<h4 class='fh'><sapn class='first name'>" +
-                    name +
-                    "<sapn class='first pagenum'>0" +
-                    (i + psn) +
-                    '</sapn></sapn></h4><div class="contp">'
-            }
-        } else if (i + psn > 1 && i + psn < 10) {
-            content +=
-                "<h4><span class='name2'>" +
-                name +
-                "</span><span class='pagenum2'>0" +
-                (i + psn) +
-                "</span></h4><div class='contp'>"
-        } else {
-            content +=
-                "<h4><span class='name2'>" +
-                name +
-                "</span><span class='pagenum2'>" +
-                (i + psn) +
-                "</span></h4><div class='contp'>"
-        }
-        content += '<img src=' + imgs[i - 1] + '>'
+        content +=
+            "<h4 class='fh'><sapn class='first name'>" +
+            name +
+            "<sapn class='first pagenum'>" +
+            (1 + psn) +
+            '</sapn></sapn></h4><div class="contp">'
+        content += '<span class="psimg"></span>' // <img src="static/default/laojiapu-@2x.png">
         content += '</div></div></section>'
         content = content.replace(/>010</g, '>10<')
         $(cell).append(content)
+        pagetotal = 1
+    } else if (pagetotal >= 1) {
+        for (var i = 1; i <= pagetotal; i++) {
+            content = '<section><div class="mains clearfix old">'
+            if (i === 1) {
+                if (i + psn > 10) {
+                    content +=
+                        "<h4 class='fh'><sapn class='first name'>" +
+                        name +
+                        "<sapn class='first pagenum'>" +
+                        (i + psn) +
+                        '</sapn></sapn></h4><div class="contp">'
+                } else {
+                    content +=
+                        "<h4 class='fh'><sapn class='first name'>" +
+                        name +
+                        "<sapn class='first pagenum'>0" +
+                        (i + psn) +
+                        '</sapn></sapn></h4><div class="contp">'
+                }
+            } else if (i + psn > 1 && i + psn < 10) {
+                content +=
+                    "<h4><span class='name2'>" +
+                    name +
+                    "</span><span class='pagenum2'>0" +
+                    (i + psn) +
+                    "</span></h4><div class='contp'>"
+            } else {
+                content +=
+                    "<h4><span class='name2'>" +
+                    name +
+                    "</span><span class='pagenum2'>" +
+                    (i + psn) +
+                    "</span></h4><div class='contp'>"
+            }
+            content += '<img src=' + imgs[i - 1] + '>'
+            content += '</div></div></section>'
+            content = content.replace(/>010</g, '>10<')
+            $(cell).append(content)
+        }
     }
     return pagetotal + psn
 }
@@ -663,20 +704,21 @@ export function pagetionPS(cell, data, name, psn) {
 export function bg(cell1, cell2, cell3, btn1, btn2, btn3) {
     var ic = 0
     var pic = []
-    $('body').on('touchend', cell2, function() {
+        // touchend -> touchstart
+    $('body').on('touchstart', cell2, function() {
         $(cell1).show()
         $.each($(cell2).children('img'), function(index, el) {
-            pic.push($(el).attr('src'))
+            pic.unshift($(el).attr('src'))
         })
         $(cell3).css({
             background: 'url(' + pic[0] + ') no-repeat center',
             backgroundSize: 'contain'
         })
     })
-    $(cell1).on('touchend', btn1, function() {
+    $(cell1).on('touchstart', btn1, function() {
         $(cell1).hide()
     })
-    $(cell1).on('touchend', btn2, function() {
+    $(cell1).on('touchstart', btn2, function() {
         ic--
         if (ic < 0) {
             ic = pic.length - 1
@@ -686,7 +728,7 @@ export function bg(cell1, cell2, cell3, btn1, btn2, btn3) {
             backgroundSize: 'contain'
         })
     })
-    $(cell1).on('touchend', btn3, function() {
+    $(cell1).on('touchstart', btn3, function() {
         ic++
         if (ic > pic.length - 1) {
             ic = 0
@@ -724,7 +766,7 @@ export function getPhoneType() {
         var wigth = window.screen.width
             // window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
         if (wigth > 400) {
-            phoneType = 6 // 'iphone6 plus'
+            phoneType = 6.5 // 'iphone6 plus'
         } else if (wigth > 370) {
             phoneType = 6 // 'iphone6'
         } else if (wigth > 315) {
@@ -824,7 +866,7 @@ export function checkCode(str) {
 }
 
 // 获得所有数字字母符号中文字符
-function GetNoZhAll(str) {
+export function GetNoZhAll(str) {
     // var reg = /[0-9A-Za-z^%&',;=?$<>《》。.，；-_"“”【】{}!！]/ig
     // /[\u3002|\uff1f|\uff01|\uff0c|\u3001|\uff1b|\uff1a|\u201c|\u201d|\u2018|\u2019|\uff08|\uff09|\u300a|\u300b|\u3008|\u3009|\u3010|\u3011|\u300e|\u300f|\u300c|\u300d|\ufe43|\ufe44|\u3014|\u3015|\u2026|\u2014|\uff5e|\ufe4f|\uffe5]/
     var reg = /[a-z0-9A-Z',;=?$<>.-_"{}\u3002|\uff1f|\uff01|\uff0c|\u3001|\uff1b|\uff1a|\u201c|\u201d|\u2018|\u2019|\uff08|\uff09|\u300a|\u300b|\u3008|\u3009|\u3010|\u3011|\u300e|\u300f|\u300c|\u300d|\ufe43|\ufe44|\u3014|\u3015|\u2026|\u2014|\uff5e|\ufe4f|\uffe5]/ig
@@ -832,12 +874,11 @@ function GetNoZhAll(str) {
     return font.length
 }
 
-function GetZh(str) {
+export function GetZh(str) {
     var reg = /[\u4e00-\u9fa5]/ig
     var s = str.match(reg)
     return s.length
 }
-
 
 // 获取url参数 获得地址栏某个字段的值
 export function GetQueryString(name) {
@@ -854,6 +895,30 @@ export function Getphone(cell) {
     var phone = str.match(phoneReg)
     return phone
 }
+
+// 去除空格
+export function Trim(str) {
+    str = str.replace(/\s+/g, '')
+    return str
+}
+
+// 去除换行
+export function ClearBr(key) {
+    key = key.replace(/<\/?.+?>/g, '')
+    key = key.replace(/[\r\n]/g, '')
+    return key
+}
+
+// 去除空格和换行
+export function TrimBr(str) {
+    str = str.replace(/\s+/g, '')
+    str = str.replace(/<\/?.+?>/g, '')
+    str = str.replace(/[\r\n]/g, '')
+    return str
+}
+
+// 可以将变量传入正则进行替换
+// string.replace(new RegExp(key,'g'),"b")
 
 /**
  * 屏幕滚动
@@ -1052,3 +1117,59 @@ export function getModileType() {
         return 2
     }
 }
+
+/**
+ * 设置title的方法
+ * 避免了安卓和iOS的不兼容写法
+ */
+export function setTitle(title) {
+    var u = navigator.userAgent
+    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1
+    var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)
+    if (isAndroid) {
+        document.title = title
+    } else if (isiOS) {
+        var $body = $('body')
+        document.title = title
+        var $iframe = $('<iframe src="/favicon.ico"></iframe>')
+        $iframe.on('load', function() {
+            window.setTimeout(function() {
+                $iframe.off('load').remove()
+            }, 0)
+        }).appendTo($body)
+    }
+}
+/* 使用setTitle('123') */
+
+/**
+ * 字体转换
+ */
+/*eslint-disable */
+///全角空格为12288，半角空格为32   
+///其他字符半角(33-126)与全角(65281-65374)的对应关系是：均相差65248   
+//半角转换为全角函数   
+function ToDBC(txtstring) {
+    var tmp = "";
+    for (var i = 0; i < txtstring.length; i++) {
+        if (txtstring.charCodeAt(i) == 32) {
+            tmp = tmp + String.fromCharCode(12288);
+        }
+        if (txtstring.charCodeAt(i) < 127) {
+            tmp = tmp + String.fromCharCode(txtstring.charCodeAt(i) + 65248);
+        }
+    }
+    return tmp;
+}
+//全角转换为半角函数   
+function ToCDB(str) {
+    var tmp = "";
+    for (var i = 0; i < str.length; i++) {
+        if (str.charCodeAt(i) > 65248 && str.charCodeAt(i) < 65375) {
+            tmp += String.fromCharCode(str.charCodeAt(i) - 65248);
+        } else {
+            tmp += String.fromCharCode(str.charCodeAt(i));
+        }
+    }
+    return tmp
+}
+/*eslint-enable */

@@ -5,24 +5,35 @@
                 <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-shouji"></use>
                 </svg>
+                <!--
                 <input name="phone" v-model="phone" type="tel" placeholder="请输入手机号" @focus="ba1=false"/>
                 <mu-badge class="badge" v-if="ba1" content="!" secondary slot="right"/>
+                -->
+                <input name="phone" v-model="phone" type="tel" placeholder="请输入手机号"/>
             </fieldset>
-            <fieldset>
-                <svg class="icon" aria-hidden="true">
+            <fieldset class="Verification-group">
+                <svg class="icon" aria-hidden="true" style="font-size: .32rem">
                     <use xlink:href="#icon-yanzhengyanzhengma"></use>
                 </svg>
+                <!--
                 <input name="Verification" v-model="Verification" type="text" placeholder="请输入验证码" @focus="ba2=false"/>
                 <input name="btn" value="| 获取验证码" type="button" class="btn-Verification" @click="spend" v-if="!timer" />
                 <span v-if="timer">{{timerNum}}s</span>
                 <mu-badge class="badge" v-if="ba2" content="!" secondary slot="right"/>
+                -->
+                <input name="Verification" v-model="Verification" type="text" placeholder="请输入验证码"/>
+                <input name="btn" value="| 获取验证码" type="button" class="btn-Verification" @click="spend" v-if="!timer"/>
+                <span v-if="timer" class="tim">{{timerNum}}s</span>
             </fieldset>
             <fieldset>
                 <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-user"></use>
                 </svg>
+                <!--
                 <input name="name" v-model="name" type="text" placeholder="请输入姓名" @focus="ba3=false"/>
                 <mu-badge class="badge" v-if="ba3" content="!" secondary slot="right"/>
+                -->
+                <input name="name" v-model="name" type="text" placeholder="请输入姓名"/>
             </fieldset>
             <input name="join" type="submit" value="申请加入" v-if="btn" />
             <input name="join" type="submit" class="submit2" disabled value="申请加入" v-if="!btn" />
@@ -37,7 +48,7 @@
 
 <script>
 import axios from 'axios'
-import { checkMobile, checkName, checkCode, GetQueryString } from '../../static/js/app.js'
+import { checkMobile, checkName, checkCode } from '../../static/js/app.js'
 import '../../static/js/iconfont2.js'
     export default {
         data() {
@@ -58,14 +69,15 @@ import '../../static/js/iconfont2.js'
         methods: {
             turn() {
                 var self = this
-                var inviter = GetQueryString('inviter_id')
+                // var inviter = GetQueryString('inviter_id')
+                // var genealogy = GetQueryString('genealogy_id')
                 if (checkMobile(self.phone) && checkName(self.name) && checkCode(self.Verification)) {
                     axios.post(self.$store.state.uri + 'application', {
                         captcha: self.Verification,
                         genealogy_id: self.$store.state.genealogy_id,
                         mobile: self.phone,
                         name: self.name,
-                        inviter_id: inviter
+                        inviter_id: self.$store.state.inviter_id
                     }, {
                         headers: {
                             'version': '1.1'
@@ -75,6 +87,12 @@ import '../../static/js/iconfont2.js'
                         // console.log(response)
                         // var cover = response.genealogy.cover
                         // var name = response.genealogy.name
+                        if (response.data.err_code !== 0 || response.data.err_code !== 200) {
+                            alert(response.data.err_msg)
+                        }
+                        if (response.data.genealogy.cover === null || response.data.genealogy.cover === undefined || response.data.genealogy.cover === '') {
+                            alert('服务器发生一个错误,请稍后再试')
+                        }
                         self.$store.dispatch('addGenealogy', {cover: response.data.genealogy.cover, name: response.data.genealogy.name})
                         self.$router.push('/success')
                     })

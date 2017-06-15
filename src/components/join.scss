@@ -55,7 +55,8 @@ form {
         border: none;
         border-bottom: 1px solid #B68957;
         input {
-            width: 2rem;
+            width: 88%;
+            height: .36rem;
             @include fontInput;
             line-height: .36rem;
             background: #faf6ec;
@@ -64,7 +65,28 @@ form {
             outline: none;
         }
     }
-    input[type="submit"] {
+    .Verification-group {
+        position: relative;
+        input[type="text"] {
+            width: 60%;
+        }
+        .icon {
+            margin-right: .2rem;
+        }
+    }
+    input[type="button"],
+    .Verification-group .tim {
+        width: 2rem;
+        height: .36rem;
+        line-height: .36rem;
+        position: absolute;
+        right: 0.625em;
+        bottom: 0.75em;
+        z-index: 99;
+        float: right;
+    }
+    input[type="submit"],
+    {
         @include wh(100%, .88rem);
         border-radius: .1rem;
         background-color: #B68957;

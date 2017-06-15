@@ -3,6 +3,7 @@ const details = r => require.ensure([], () => r(require('../components/details.v
 const join = r => require.ensure([], () => r(require('../components/join.vue')), 'join')
 const success = r => require.ensure([], () => r(require('../components/success.vue')), 'success')
 const content = r => require.ensure([], () => r(require('../components/content.vue')), 'content')
+const download = r => require.ensure([], () => r(require('../components/download.vue')), 'download')
 export default [{
     path: '/',
     component: home
@@ -24,4 +25,7 @@ export default [{
 }, {
     path: '/content',
     component: content
+}, {
+    path: '/download',
+    component: download
 }]

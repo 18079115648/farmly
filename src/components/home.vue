@@ -106,7 +106,7 @@ export default {
 		return {
 			animate: true,
 			load: true,
-			titles: [{ name: '谱序', index: '02' }, { name: '姓氏起源', index: '' }, { name: '族规家训', index: '' }, { name: '辈份表', index: '' }, { name: '名人榜', index: '' }, { name: '功德榜', index: '' }, { name: '长寿榜', index: '' }, { name: '祠堂', index: '' }, { name: '老家谱', index: '' }, { name: '后记', index: '' }],
+			titles: [{ name: '谱序', index: '02' }, { name: '姓氏起源', index: '' }, { name: '族规家训', index: '' }, { name: '辈分表', index: '' }, { name: '名人榜', index: '' }, { name: '功德榜', index: '' }, { name: '长寿榜', index: '' }, { name: '祠堂', index: '' }, { name: '老家谱', index: '' }, { name: '后记', index: '' }],
 			index: [],
 			bookData: {},
 			section1:'',
@@ -129,6 +129,7 @@ export default {
 		// let genealogyId = GetQueryString('genealogy_id') || 1
 		// self.$store.state.genealogy_id = GetQueryString('genealogy_id') || 1
 		self.$store.dispatch('addID', GetQueryString('genealogy_id') || 1)
+		self.$store.dispatch('addInviteR', GetQueryString('inviter_id') || 1)
 		axios.get(_self.$store.state.uri + 'genealogy/view/' + self.$store.state.genealogy_id, {
                 params: {
                    genealogy_id: self.$store.state.genealogy_id
@@ -166,16 +167,16 @@ export default {
 	methods: {
 		loading(self) {
 			var i = getPhoneType()
-			var ths = 20
-			var fths = 7
+			var ths = 18
+			var fths = 6
 			var vths = 14
-			var thsRE = 9
-			var fths2 = 7
+			var thsRE = 7
+			var fths2 = 6
 			if (i === 4 || i === 5) {
-				ths = 15
+				ths = 13
 				fths = 4
 				vths = 12
-				thsRE = 7
+				thsRE = 5
 				fths2 = 5
 			}
 			self.index[0] = pagetion('.flipbook', '.vis1', self.titles[0].name, ths, 1)

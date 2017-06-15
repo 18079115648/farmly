@@ -106,7 +106,7 @@
   width: 100%;
   height: auto;
   flex: none;
-  padding: .72rem 0rem .56rem;
+  padding: .6rem 0rem .42rem;
 }
 
 .modal.index dt .font1 {
@@ -126,11 +126,16 @@
 .modal.index dd {
   flex: 1;
   width: 100%;
-  height: 0.89rem;
+  height: 0.8rem;
   border-bottom: 1px dashed #a6a6a6;
   font: 0.28rem PingFangSC-Light;
   color: #555;
-  line-height: 0.88rem;
+  line-height: 0.8rem;
+  display: flex;
+}
+
+.modal.index dd div {
+  align-self: center;
 }
 
 .modal.index dd .font1 {
@@ -151,9 +156,9 @@
 .modal.bar li {
   width: 1rem;
   height: 1rem;
-  border-radius: .26rem;
+  border-radius: .16rem;
   display: block;
-  background: rgba(0, 0, 0, 0.72);
+  background: rgba(0, 0, 0, 0.5);
   text-align: center;
   color: rgba(255, 255, 255, 0.72);
 }
@@ -384,6 +389,7 @@
   writing-mode: vertical-lr;
   writing-mode: tb-lr;
   line-height: .46rem;
+  letter-spacing: 12px;
 }
 
 .flipbook .page .re tt {
@@ -391,26 +397,25 @@
   width: 6rem;
   height: 1rem;
   margin: 0rem auto;
-  background-color: #efe9dc;
+  margin-bottom: .22rem;
+  display: flex;
+  align-items: space-around;
+  justify-content: space-around;
+  align-content: space-between;
 }
 
 .flipbook .page .re tt span {
   width: 1rem;
   height: 1rem;
-  border-left: 1px solid #c8b88c;
-  border-top: 1px solid #c8b88c;
   display: block;
   float: left;
   text-align: center;
   line-height: 1rem;
 }
 
-.flipbook .page .re tt span:last-child {
-  border-right: 1px solid #c8b88c;
-}
-
-.flipbook .page .re p:last-child span {
-  border-bottom: 1px solid #c8b88c;
+.flipbook .page .re tt .grid {
+  background: url("../../static/default/默认线框@2x.png") no-repeat center;
+  background-size: cover;
 }
 
 .flipbook .page .pic .photo {
@@ -418,6 +423,7 @@
   height: 6rem;
   margin: 0rem auto .4rem;
   position: relative;
+  overflow: hidden;
 }
 
 .flipbook .page .pic .photo i {
@@ -436,13 +442,30 @@
   border-radius: 0rem 0rem .1rem 0rem;
 }
 
-.flipbook .page .pic img {
-  width: 6rem;
-  height: 6rem;
+.flipbook .page .pic img,
+.flipbook .page .pic .nameold,
+.flipbook .page .pic .citang {
+  width: 100%;
+  height: 100%;
   display: block;
   position: absolute;
   z-index: 8;
   border-radius: .1rem;
+}
+
+.flipbook .page .pic .nameold {
+  background: url("../../static/default/名人缺省.png") no-repeat center;
+}
+
+.flipbook .page .pic .citang {
+  background: url("../../static/default/组-2@2x.png") no-repeat center;
+}
+
+.flipbook .page .pic .nameold,
+.flipbook .page .pic .citang {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
 }
 
 .flipbook .page ul {
@@ -528,11 +551,25 @@
   float: right;
 }
 
-.flipbook .page .old img {
-  width: 6.14rem;
-  height: 9.14rem;
+.flipbook .page .old .contp {
+  width: 100%;
+  height: 80%;
+  padding: 0rem .3rem;
+  overflow: hidden;
+}
+
+.flipbook .page .old img,
+.flipbook .page .old .psimg {
+  width: 100%;
+  height: auto;
   display: block;
   margin: 0rem auto;
+}
+
+.flipbook .page .old .psimg {
+  height: 100%;
+  background: url("../../static/default/laojiapu-@2x.png") no-repeat center;
+  background-size: cover;
 }
 
 /*
