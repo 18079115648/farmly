@@ -129,6 +129,8 @@ export default {
 		// let genealogyId = GetQueryString('genealogy_id') || 1
 		// self.$store.state.genealogy_id = GetQueryString('genealogy_id') || 1
 		self.$store.dispatch('addID', GetQueryString('genealogy_id') || 1)
+		localStorage.setItem('addID', GetQueryString('genealogy_id') || 1)
+		localStorage.setItem('addInviteR', GetQueryString('inviter_id') || 1)
 		self.$store.dispatch('addInviteR', GetQueryString('inviter_id') || 1)
 		axios.get(_self.$store.state.uri + 'genealogy/view/' + self.$store.state.genealogy_id, {
                 params: {
@@ -219,7 +221,7 @@ export default {
 			$('.modal.index .button').stop().show().stop().animate({ left: '100%' }, 400, 'swing')
 		},
 		href() {
-			this.$router.push('/join')
+			this.$router.push('/oauthJoin')
 		}
 	}
 }
